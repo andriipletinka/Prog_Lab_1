@@ -60,7 +60,19 @@ def get_pure_user_words(user_words, letters, words_from_dict):
     Checks user words with the rules and returns list of those words
     that are not in dictionary.
     """
-    pass
+    pure_user_words = []
+    for word in user_words:
+        word_letters = [i for i in word]
+        if len(word) >= 4 and letters[4] in word:
+            match_rules = True
+        else:
+            match_rules = False
+        for letter in word_letters:
+            if word_letters.count(letter) > letters.count(letter):
+                match_rules = False
+        if match_rules and word not in words_from_dict:
+            pure_user_words.append(word)
+    return pure_user_words
 
 
 def results():
