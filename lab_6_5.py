@@ -1,3 +1,6 @@
+"""
+Target game
+"""
 from typing import List
 from string import ascii_uppercase
 import random
@@ -76,4 +79,25 @@ def get_pure_user_words(user_words, letters, words_from_dict):
 
 
 def results():
-    pass
+    """
+    Print the game results and write it in results.txt
+    """
+    grid = generate_grid()
+    for row in grid:
+        print(row)
+    user_words = get_user_words()
+    letters = []
+    for row in grid:
+        for letter in row:
+            letters.append(letter.lower())
+    dict_words = get_words('en', letters)
+    print(dict_words)
+    print(user_words)
+    pure_user_words = get_pure_user_words(user_words, letters, dict_words)
+    print(pure_user_words)
+    with open('results.txt', 'w') as results_txt:
+        for row in grid:
+            results_txt.writelines(f'{row}\n')
+        results_txt.writelines(f'{dict_words}\n')
+        results_txt.writelines(f'{user_words}\n')
+        results_txt.writelines(f'{pure_user_words}\n')
