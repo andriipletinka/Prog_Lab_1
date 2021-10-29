@@ -24,7 +24,23 @@ def get_words(path: str, letters: List[str]) -> List[str]:
     """
     Reads the file f. Checks the words with rules and returns a list of words.
     """
-    pass
+    with open(path, 'r') as file:
+        vocabulary = [i.strip() for i in file.readlines()]
+        words_lst = []
+        for word in vocabulary:
+            word = word.lower()
+            word_letters = [i for i in word]
+            if len(word) >= 4 and letters[4] in word:
+                match_rules = True
+            else:
+                match_rules = False
+            for letter in word_letters:
+                if word_letters.count(letter) > letters.count(letter):
+                    match_rules = False
+            if match_rules:
+                if word not in words_lst:
+                    words_lst.append(word)
+        return words_lst
 
 
 def get_user_words() -> List[str]:
