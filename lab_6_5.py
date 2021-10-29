@@ -48,7 +48,9 @@ def get_user_words() -> List[str]:
     Gets words from user input and returns a list with these words.
     Usage: enter a word or press ctrl+d to finish.
     """
-    pass
+    user_words = input()
+    user_words = user_words.strip().split()
+    return user_words
 
 
 def get_pure_user_words(user_words, letters, words_from_dict):
