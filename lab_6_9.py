@@ -7,8 +7,10 @@ import random
 def generate_grid():
     """
     Generate a list of 5 unique letters of ukrainian alphabet.
-    >>> print(generate_grid())
-    ['р', 'ю', 'й', 'і', 'ш']
+
+    >>> random.seed(5)
+    >>> generate_grid()
+    ['м', 'т', 'б', 'щ', 'л']
     """
     alphabet = 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя'
     letters = []
@@ -23,6 +25,9 @@ def get_words(path, letters):
     """
     (str, list[str]) -> list[tuple]
     Return a list of all words that matches conditions and their parts of language.
+
+    >>> get_words('base.lst', ['ь'])
+    []
     """
     with open(path, 'r') as vocabulary:
         lines = vocabulary.readlines()
@@ -47,7 +52,7 @@ def get_words(path, letters):
                 elif line_lst[1].startswith('adv'):
                     value = 'adverb'
                 if add_condition:
-                    words.append((line_lst[1], value))
+                    words.append((line_lst[0], value))
         return words
 
 
@@ -55,6 +60,9 @@ def check_user_words(user_words, language_part, letters, dict_of_words):
     """
     (list[str], str, list[str], list[tuple]) -> (list[str], list[str])
     Return a list of correct words and missing words.
+
+    >>> check_user_words([], "verb", ['щ'], get_words("base.lst", ['щ']))
+    ([], [])
     """
     correct_words = []
     missing_words = []
@@ -71,7 +79,7 @@ def check_user_words(user_words, language_part, letters, dict_of_words):
         if correct_condition:
             correct_words.append(word)
     for word in dict_of_words:
-        if word not in correct_words:
+        if word not in correct_words and dict_of_words[word] == language_part:
             missing_words.append(word)
     return correct_words, missing_words
 
@@ -86,6 +94,6 @@ def results():
     dict_of_words = get_words('base.lst', letters)
     user_words = input()
     user_words = user_words.split()
-    correct_words, missing_words = check_user_words(user_words, language_part, letters, dict_of_words)
-    print(correct_words)
-    print(missing_words)
+    correct_wrds, missing_wrds = check_user_words(user_words, language_part, letters, dict_of_words)
+    print(correct_wrds)
+    print(missing_wrds)
