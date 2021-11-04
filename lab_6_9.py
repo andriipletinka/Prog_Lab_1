@@ -1,4 +1,8 @@
+"""
+Target game for ukrainian language.
+"""
 import random
+
 
 def generate_grid():
     """
@@ -16,6 +20,10 @@ def generate_grid():
 
 
 def get_words(path, letters):
+    """
+    (str, list[str]) -> list[tuple]
+    Return a list of all words that matches conditions and their parts of language.
+    """
     with open(path, 'r') as vocabulary:
         lines = vocabulary.readlines()
         words = []
@@ -44,6 +52,10 @@ def get_words(path, letters):
 
 
 def check_user_words(user_words, language_part, letters, dict_of_words):
+    """
+    (list[str], str, list[str], list[tuple]) -> (list[str], list[str])
+    Return a list of correct words and missing words.
+    """
     correct_words = []
     missing_words = []
     dict_of_words = dict(dict_of_words)
@@ -65,6 +77,9 @@ def check_user_words(user_words, language_part, letters, dict_of_words):
 
 
 def results():
+    """
+    Run a game and print results.
+    """
     letters = generate_grid()
     print(letters)
     language_part = random.choice(['noun', 'verb', 'adjective', 'adverb'])
