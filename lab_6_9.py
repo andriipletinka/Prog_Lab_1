@@ -62,3 +62,15 @@ def check_user_words(user_words, language_part, letters, dict_of_words):
         if word not in correct_words:
             missing_words.append(word)
     return correct_words, missing_words
+
+
+def results():
+    letters = generate_grid()
+    print(letters)
+    language_part = random.choice(['noun', 'verb', 'adjective', 'adverb'])
+    dict_of_words = get_words('base.lst', letters)
+    user_words = input()
+    user_words = user_words.split()
+    correct_words, missing_words = check_user_words(user_words, language_part, letters, dict_of_words)
+    print(correct_words)
+    print(missing_words)
