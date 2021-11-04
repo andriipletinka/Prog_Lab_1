@@ -18,7 +18,7 @@ def generate_grid():
 def get_words(path, letters):
     with open(path, 'r') as vocabulary:
         lines = vocabulary.readlines()
-        words = {}
+        words = []
         for line in lines:
             line = line.strip()
             add_condition = True
@@ -39,5 +39,26 @@ def get_words(path, letters):
                 elif line_lst[1].startswith('adv'):
                     value = 'adverb'
                 if add_condition:
-                    words[line_lst[0]] = value
+                    words.append((line_lst[1], value))
         return words
+
+
+def check_user_words(user_words, language_part, letters, dict_of_words):
+    correct_words = []
+    missing_words = []
+    dict_of_words = dict(dict_of_words)
+    for word in user_words:
+        correct_condition = True
+        if word[0] not in letters:
+            correct_condition = False
+        if word not in dict_of_words:
+            correct_condition = False
+        else:
+            if dict_of_words[word] != language_part:
+                correct_condition = False
+        if correct_condition:
+            correct_words.append(word)
+    for word in dict_of_words:
+        if word not in correct_words:
+            missing_words.append(word)
+    return correct_words, missing_words
