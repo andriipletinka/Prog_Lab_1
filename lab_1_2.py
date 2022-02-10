@@ -80,7 +80,7 @@ def main():
     lst.sort(key=lambda x: x[-1])
     ten_closest = lst[:10]
     ten_farest = lst[-10:]
-    map = folium.Map(location=[args.latitude, args.longitude], zoom_start=5)
+    map = folium.Map(location=[args.latitude, args.longitude], zoom_start=3)
     put_markers(ten_closest, "10 closest filming locations", map)
     put_markers(ten_farest, "10 farest filming locations", map)
     map.add_child(folium.LayerControl())
