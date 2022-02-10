@@ -10,3 +10,5 @@ The first argument is a year of films' release, the second is a user latitude, t
 
 As the result we get a HTML map named Map_1.html.
 ![image](https://user-images.githubusercontent.com/93386415/153398571-ef6ed22f-ec40-47d7-8fea-b5566b640ae9.png)
+
+P.S. In the example locations.list was shortened version of the original file.
